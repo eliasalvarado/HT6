@@ -8,6 +8,7 @@
 import java.util.Scanner;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Map;
 
 
 
@@ -17,6 +18,8 @@ public class Principal
     {
         Archivo archivo = new Archivo();
         Scanner scanner = new Scanner(System.in);
+
+        Map<String, String> map = Factory.constructor(1);
 
         String ruta = "";
         
