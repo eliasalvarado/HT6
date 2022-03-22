@@ -2,7 +2,7 @@
  * Clase Factory. Encargada de la implementacion del MAP deseado por el usuario.
  * Autor: Elias Alberto Alvarado Raxon - 21808
  * Fecha de creacion: 19/03/2022
- * @version 2
+ * @version 3
  */
 
 import java.util.HashMap;

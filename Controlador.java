@@ -2,7 +2,7 @@
  * Clase Controlador. Sera el encargado de manejar todo lo que el usuario solicite
  * Autor: Elias Alberto Alvarado Raxon - 21808
  * Fecha de creacion: 21/03/2022
- * @version 5
+ * @version 6
  */
 
 import java.util.ArrayList;
@@ -97,7 +97,7 @@ public class Controlador
 
             if(split[0].equals(categoriaAnterior))
             {
-                if(x != 0) productosCategoria = inventario.get(split[0]);
+                if(x != 0) productosCategoria = this.inventario.get(split[0]);
             }
             productosCategoria.add(split[1]);
 

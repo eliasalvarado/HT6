@@ -2,7 +2,7 @@
  * Clase principal. La cual sera la encargada de interactuar con el usuario
  * Autor: Elias Alberto Alvarado Raxon - 21808
  * Fecha de creacion: 19/03/2022
- * @version 5
+ * @version 7
  */
 
 import java.util.Scanner;
