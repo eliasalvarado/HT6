@@ -2,12 +2,14 @@
  * Clase Controlador. Sera el encargado de manejar todo lo que el usuario solicite
  * Autor: Elias Alberto Alvarado Raxon - 21808
  * Fecha de creacion: 21/03/2022
- * @version 8
+ * @version 10
  */
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashSet;
 import java.util.Map;
+import java.util.Set;
 
 public class Controlador
 {
@@ -64,7 +66,10 @@ public class Controlador
             for(String categoria: this.ordenados(this.carrito))
             {
                 ArrayList<String> productos = this.carrito.get(categoria);
-                for(String producto: productos)
+                Set<String> hashSet = new HashSet<String>(productos);
+                ArrayList<String> sinDuplicados = new ArrayList<String>();
+                sinDuplicados.addAll(hashSet);
+                for(String producto: sinDuplicados)
                 {
                     int repeticiones = Collections.frequency(productos, producto);
                     info += "\n" + contador + ". Producto: " + producto + "\n\tCategoria: " + categoria + "\n\tCantidad: " + repeticiones;
@@ -77,7 +82,10 @@ public class Controlador
             for(String categoria: this.carrito.keySet())
             {
                 ArrayList<String> productos = this.carrito.get(categoria);
-                for(String producto: productos)
+                Set<String> hashSet = new HashSet<String>(productos);
+                ArrayList<String> sinDuplicados = new ArrayList<String>();
+                sinDuplicados.addAll(hashSet);
+                for(String producto: sinDuplicados)
                 {
                     int repeticiones = Collections.frequency(productos, producto);
                     info += "\n" + contador + ". Producto: " + producto + "\n\tCategoria: " + categoria + "\n\tCantidad: " + repeticiones;

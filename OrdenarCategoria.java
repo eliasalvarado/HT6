@@ -1,5 +1,12 @@
 import java.util.Comparator;
 
+/**
+ * Clase OrdenarCategoria. Implementara el Comparator para poder realizar el ordenamiento de los MAPs alfabeticamente
+ * Autor: Elias Alberto Alvarado Raxon - 21808
+ * Fecha de creacion: 21/03/2022
+ * @version 1
+ */
+
 public class OrdenarCategoria implements Comparator<String>
 {
 

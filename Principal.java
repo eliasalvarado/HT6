@@ -2,17 +2,10 @@
  * Clase principal. La cual sera la encargada de interactuar con el usuario
  * Autor: Elias Alberto Alvarado Raxon - 21808
  * Fecha de creacion: 19/03/2022
- * @version 7
+ * @version 9
  */
 
 import java.util.Scanner;
-
-
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
-
-
 
 public class Principal
 {   
@@ -58,15 +51,11 @@ public class Principal
                     if(controlador.getCarrito().isEmpty()) System.out.println("\nAun no ha agregado ningun producto a su coleccion.");
                     else
                     {
-                        respuesta = pregunta("\n¿Como lo desea visualizar?\n1. Ordenados por categoria.\n2. Sin ordenar.\nRespueta: ", 2);
-                        if(respuesta == 1)
-                        {
-                            System.out.println(controlador.datosProducto(true));
-                        }
-                        else
-                        {
-                            System.out.println(controlador.datosProducto(false));
-                        }
+                        respuesta = pregunta("\n¿Como lo desea visualizar?\n1. Ordenados alfabeticamente por categoria.\n2. Sin ordenar.\nRespueta: ", 2);
+                        if(respuesta == 1) System.out.println(controlador.datosProducto(true));
+
+                        else System.out.println(controlador.datosProducto(false));
+
                     }
                     break;
                 
@@ -74,15 +63,11 @@ public class Principal
                     if(controlador.getInventario().isEmpty()) System.out.println("\nAun no se tiene un inventario creado.");
                     else
                     {
-                        respuesta = pregunta("\n¿Como lo desea visualizar?\n1. Ordenados por categoria.\n2. Sin ordenar.\nRespueta: ", 2);
-                        if(respuesta == 1)
-                        {
-                            System.out.println(controlador.verArticulos(controlador.getInventario(), true));
-                        }
-                        else
-                        {
-                            System.out.println(controlador.verArticulos(controlador.getInventario(), false));
-                        }
+                        respuesta = pregunta("\n¿Como lo desea visualizar?\n1. Ordenados alfabeticamente por categoria.\n2. Sin ordenar.\nRespueta: ", 2);
+                        if(respuesta == 1) System.out.println(controlador.verArticulos(controlador.getInventario(), true));
+
+                        else System.out.println(controlador.verArticulos(controlador.getInventario(), false));
+
                     }
                     break;
                 
