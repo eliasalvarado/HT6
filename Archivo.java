@@ -2,7 +2,7 @@
  * Clase Archivo. La cual se encagara de manejar el archivo de tipo txt
  * Autor: Elias Alberto Alvarado Raxon - 21808
  * Fecha de creacion: 19/03/2022
- * @version 1
+ * @version 3
  */
 
 import java.io.BufferedWriter;

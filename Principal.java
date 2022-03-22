@@ -2,10 +2,12 @@
  * Clase principal. La cual sera la encargada de interactuar con el usuario
  * Autor: Elias Alberto Alvarado Raxon - 21808
  * Fecha de creacion: 19/03/2022
- * @version 1
+ * @version 5
  */
 
 import java.util.Scanner;
+
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -16,38 +18,63 @@ public class Principal
 {   
     public static void main(String[] args)
     {
-        Archivo archivo = new Archivo();
         Scanner scanner = new Scanner(System.in);
+        Controlador controlador = new Controlador();
 
-        Map<String, String> map = Factory.constructor(1);
-
+        boolean buclePrincipal = true;
         String ruta = "";
-        
-        try {
-            System.out.println("\nPor favor, ingrese la ruta de su archivo de tipo texto.");
-            ruta = scanner.nextLine();
-            ruta = ruta + "\\ListadoProducto.txt";
-            System.out.println(archivo.crearArchivo(ruta));
-            
-        } catch (Exception e) {
-            //TODO: handle exception
-            System.out.println("\nNo se pudo leer el documento. Por favor, asegurese que la ruta sea la correcta.");
-        }
+        int respuesta = 0;
 
-        ArrayList<String> lista = archivo.leerArchivo();
+        System.out.println("\nPor favor, ingrese la ruta de su archivo de tipo texto.\nRespuesta: ");
+        ruta = scanner.nextLine();
+        ruta = ruta + "\\ListadoProducto.txt";
+        System.out.println(controlador.leerArchivo(ruta));
 
-        String info = "";
-        String[] split;
-        for(String x: lista)
+        int tipo = pregunta("¿Que tipo de MAP desea utilizar?\n1. HashMap.\n2. TreeMap.\n3. LinkedHashMap.\nRespueta: ", 3);
+        System.out.println(controlador.usoMap(tipo));
+
+        while(buclePrincipal)
         {
-            split = x.split("\\|");
-            split[0] = split[0].trim();
-            split[1] = split[1].trim();
-            System.out.println("\nCategoria: " + split[0] + " Producto: " + split[1]);
-            info += x + "\n";
+            respuesta = pregunta("\n¿Que desea realizar?\n1. Agregar producto.\n2. Mostrar categoria de un producto.\n3. Mostrar carrito.\n4. Mostrar inventario.\n5. Salir.\nRespuesta: ", 5);
+            switch (respuesta) {
+                case 1:
+                    System.out.println("\n1.");
+                    break;
+
+                case 2:
+                    System.out.println("\n2.");
+                    break;
+
+                case 3:
+                    respuesta = pregunta("\n¿Como lo desea visualizar?\n1. Ordenados por tipo.\n2. Sin ordenar.\nRespueta: ", 2);
+                    if(respuesta == 1)
+                    {
+                        System.out.println("\nOrdenados");
+                    }
+                    else
+                    {
+                        System.out.println("\nSin ordenar");
+                    }
+                    break;
+                
+                case 4:
+                    respuesta = pregunta("\n¿Como lo desea visualizar?\n1. Ordenados por tipo.\n2. Sin ordenar.\nRespueta: ", 2);
+                    if(respuesta == 1)
+                    {
+                        System.out.println("\nOrdenados");
+                    }
+                    else
+                    {
+                        System.out.println(controlador.verArticulos());
+                    }
+                    break;
+                
+                case 5:
+                    buclePrincipal = false;
+                    break;
+            }
         }
 
-        //System.out.println(info);
     }  
 
     
