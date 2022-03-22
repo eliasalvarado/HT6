@@ -5,12 +5,10 @@
  * @version 3
  */
 
-import java.io.BufferedWriter;
+
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.FileWriter;
 import java.util.ArrayList;
-import java.util.Random;
 import java.util.Scanner;
 
 public class Archivo
@@ -31,39 +29,6 @@ public class Archivo
             return "\nOcurrio un error al intentar crear el archivo.";
         }
     }
-    
-	/** 
-	 * @param cantidad
-	 */
-	public void agregarNumeros(int cantidad)
-    {
-		FileWriter flwriter = null;
-        int x = 0;
-        Random random = new Random();
-		try {
-			flwriter = new FileWriter(this.archivo);
-			BufferedWriter bfwriter = new BufferedWriter(flwriter);
-			while(x < cantidad)
-            {
-				bfwriter.write(random.nextInt(999999) + "\n");
-                x++;
-			}
-			//cierra el buffer intermedio
-			bfwriter.close();
-			System.out.println("Escritura realizada satisfactoriamente.");
- 
-		} catch (Exception e) {
-			e.printStackTrace();
-		} finally {
-			if (flwriter != null) {
-				try {
-					flwriter.close();
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		}
-	}
 
 	/** 
 	 * @return ArrayList<Integer>
@@ -88,5 +53,13 @@ public class Archivo
 			//TODO: handle exception
 			return null;
 		}
+	}
+
+	/** 
+	 * @return File
+	 */
+	public File getFile()
+	{
+		return this.archivo;
 	}
 }

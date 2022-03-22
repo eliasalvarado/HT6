@@ -18,19 +18,50 @@ public class Principal
         Controlador controlador = new Controlador();
 
         boolean buclePrincipal = true;
+        boolean bucle = true;
         String ruta = "";
         int respuesta = 0;
         String categoria;
         String producto;
 
-        System.out.println("\nPor favor, ingrese la ruta de su archivo de tipo texto.\nRespuesta: ");
-        ruta = scanner.nextLine();
-        ruta = ruta + "\\ListadoProducto.txt";
-        System.out.println(controlador.leerArchivo(ruta));
-
-        int tipo = pregunta("¿Que tipo de MAP desea utilizar?\n1. HashMap.\n2. TreeMap.\n3. LinkedHashMap.\nRespueta: ", 3);
+        int tipo = pregunta("\n¿Que tipo de MAP desea utilizar?\n1. HashMap.\n2. TreeMap.\n3. LinkedHashMap.\nRespueta: ", 3);
         System.out.println(controlador.usoMap(tipo));
 
+        while(bucle)
+        {
+            try {
+                System.out.println("\nPor favor, ingrese la ruta de su archivo de tipo texto.\nRespuesta: ");
+                ruta = scanner.nextLine();
+                ruta = ruta + "\\ListadoProducto.txt";
+                controlador.leerArchivo(ruta);
+                
+                if(controlador.comprobarArchivo())
+                {
+                    bucle = false; 
+                    System.out.println(controlador.leerArchivo(ruta));
+                }
+                else
+                {
+                    bucle = false;
+                    System.out.println("\nHa ocurrido un error al intentar leer el archivo.");
+                    if(pregunta("¿Desea intentarlo de nuevo?\n1. Si.\n2. No.\nRespuesta: ", 2) == 1)
+                    {
+                        bucle = true; 
+                    }
+                    else buclePrincipal = false;
+                }
+            } catch (Exception e) {
+                //TODO: handle exception
+                bucle = false;
+                    System.out.println("\nHa ocurrido un error al intentar leer el archivo.");
+                    if(pregunta("¿Desea intentarlo de nuevo?\n1. Si.\n2. No.\nRespuesta: ", 2) == 1)
+                    {
+                        bucle = true; 
+                    }
+                    else buclePrincipal = false;
+            }
+        }    
+        
         while(buclePrincipal)
         {
             controlador.convertirInventario();

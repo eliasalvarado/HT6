@@ -63,7 +63,7 @@ public class Controlador
             ArrayList<String> productos = this.inventario.get(categoria);
             for(String productoInventario: productos)
             {
-                if(producto.equals(productoInventario)) return "\nEl producto:" + producto + " pertenece a la categoria: " + categoria;
+                if(producto.equals(productoInventario)) return "\nEl producto: " + producto + " pertenece a la categoria: " + categoria;
             }
         }
         return "\nNo se encontro la categoria para el producto indicado, probablemente este mal ingresado.";
@@ -167,6 +167,14 @@ public class Controlador
             //TODO: handle exception
             return "\nNo se pudo leer el documento. Por favor, asegurese que la ruta sea la correcta.";
         }
+    }
+
+    /** 
+     * @return boolean
+     */
+    public boolean comprobarArchivo()
+    {
+        return archivo.getFile().canRead();
     }
 
     public void convertirInventario()
