@@ -24,6 +24,8 @@ public class Principal
         boolean buclePrincipal = true;
         String ruta = "";
         int respuesta = 0;
+        String categoria;
+        String producto;
 
         System.out.println("\nPor favor, ingrese la ruta de su archivo de tipo texto.\nRespuesta: ");
         ruta = scanner.nextLine();
@@ -40,15 +42,16 @@ public class Principal
             switch (respuesta) {
                 case 1:
                     System.out.println("\nIngrese la categoria del producto que desee agregar.\nRespuesta: ");
-                    String categoria = scanner.nextLine();
-                    //System.out.println("\nProductos disponibles:" + controlador.productosCategoria(categoria));
+                    categoria = scanner.nextLine();
                     System.out.println("\nIngrese el producto que desee agregar.\nRespuesta: ");
-                    String producto = scanner.nextLine();
+                    producto = scanner.nextLine();
                     System.out.println(controlador.agregarProducto(categoria.trim(), producto.trim()));
                     break;
 
                 case 2:
-                    System.out.println("\n2.");
+                    System.out.println("\nIngrese el producto que desee buscar.\nRespuesta: ");
+                    producto = scanner.nextLine();
+                    System.out.println(controlador.categoriaProducto(producto));
                     break;
 
                 case 3:
@@ -63,7 +66,7 @@ public class Principal
                         }
                         else
                         {
-                            System.out.println(controlador.verArticulos(controlador.getCarrito()));
+                            System.out.println(controlador.datosProducto());
                         }
                     }
                     break;

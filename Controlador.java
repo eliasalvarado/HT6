@@ -2,10 +2,11 @@
  * Clase Controlador. Sera el encargado de manejar todo lo que el usuario solicite
  * Autor: Elias Alberto Alvarado Raxon - 21808
  * Fecha de creacion: 21/03/2022
- * @version 6
+ * @version 8
  */
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Map;
 
 public class Controlador
@@ -41,6 +42,37 @@ public class Controlador
         return info;
     }
 
+    public String categoriaProducto(String producto)
+    {
+        for(String categoria: this.inventario.keySet())
+        {
+            ArrayList<String> productos = this.inventario.get(categoria);
+            for(String productoInventario: productos)
+            {
+                if(producto.equals(productoInventario)) return "\nEl producto:" + producto + " pertenece a la categoria " + categoria;
+            }
+        }
+        return "\nNo se encontro la categoria para el producto indicado, probablemente este mal ingresado.";
+    }
+
+    public String datosProducto()
+    {
+        String info = "";
+        int contador = 1;
+        for(String categoria: this.carrito.keySet())
+        {
+            ArrayList<String> productos = this.carrito.get(categoria);
+            for(String producto: productos)
+            {
+                int repeticiones = Collections.frequency(productos, producto);
+                info += "\n" + contador + ". Producto: " + producto + "\n\tCategoria: " + categoria + "\n\tCantidad: " + repeticiones;
+                contador++;
+            }
+        }
+
+        return info;
+    }
+
 
     public String agregarProducto(String categoria, String producto)
     {
@@ -59,7 +91,7 @@ public class Controlador
                     info = "\nSe ha agregado el producto: " + producto + " a su coleccion.";
                     break;
                 }
-                else info = "\nNo se cuenta con el producto indicado.";
+                else info = "\nNo se cuenta con el producto indicado.\nQuizas esta lista le ayude:" + productosCategoria(categoria);
             }
         }
         else info = "\nNo se cuenta con la categoria indicada.";
