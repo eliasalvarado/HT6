@@ -58,15 +58,14 @@ public class Principal
                     if(controlador.getCarrito().isEmpty()) System.out.println("\nAun no ha agregado ningun producto a su coleccion.");
                     else
                     {
-                        //System.out.println(controlador.getCarrito());
-                        respuesta = pregunta("\n¿Como lo desea visualizar?\n1. Ordenados por tipo.\n2. Sin ordenar.\nRespueta: ", 2);
+                        respuesta = pregunta("\n¿Como lo desea visualizar?\n1. Ordenados por categoria.\n2. Sin ordenar.\nRespueta: ", 2);
                         if(respuesta == 1)
                         {
-                            System.out.println("\nOrdenados");
+                            System.out.println(controlador.datosProducto(true));
                         }
                         else
                         {
-                            System.out.println(controlador.datosProducto());
+                            System.out.println(controlador.datosProducto(false));
                         }
                     }
                     break;
@@ -75,14 +74,14 @@ public class Principal
                     if(controlador.getInventario().isEmpty()) System.out.println("\nAun no se tiene un inventario creado.");
                     else
                     {
-                        respuesta = pregunta("\n¿Como lo desea visualizar?\n1. Ordenados por tipo.\n2. Sin ordenar.\nRespueta: ", 2);
+                        respuesta = pregunta("\n¿Como lo desea visualizar?\n1. Ordenados por categoria.\n2. Sin ordenar.\nRespueta: ", 2);
                         if(respuesta == 1)
                         {
-                            System.out.println("\nOrdenados");
+                            System.out.println(controlador.verArticulos(controlador.getInventario(), true));
                         }
                         else
                         {
-                            System.out.println(controlador.verArticulos(controlador.getInventario()));
+                            System.out.println(controlador.verArticulos(controlador.getInventario(), false));
                         }
                     }
                     break;

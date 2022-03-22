@@ -55,22 +55,45 @@ public class Controlador
         return "\nNo se encontro la categoria para el producto indicado, probablemente este mal ingresado.";
     }
 
-    public String datosProducto()
+    public String datosProducto(boolean ordenado)
     {
         String info = "";
         int contador = 1;
-        for(String categoria: this.carrito.keySet())
+        if(ordenado)
         {
-            ArrayList<String> productos = this.carrito.get(categoria);
-            for(String producto: productos)
+            for(String categoria: this.ordenados(this.carrito))
             {
-                int repeticiones = Collections.frequency(productos, producto);
-                info += "\n" + contador + ". Producto: " + producto + "\n\tCategoria: " + categoria + "\n\tCantidad: " + repeticiones;
-                contador++;
+                ArrayList<String> productos = this.carrito.get(categoria);
+                for(String producto: productos)
+                {
+                    int repeticiones = Collections.frequency(productos, producto);
+                    info += "\n" + contador + ". Producto: " + producto + "\n\tCategoria: " + categoria + "\n\tCantidad: " + repeticiones;
+                    contador++;
+                }
+            }
+        }
+        else
+        {
+            for(String categoria: this.carrito.keySet())
+            {
+                ArrayList<String> productos = this.carrito.get(categoria);
+                for(String producto: productos)
+                {
+                    int repeticiones = Collections.frequency(productos, producto);
+                    info += "\n" + contador + ". Producto: " + producto + "\n\tCategoria: " + categoria + "\n\tCantidad: " + repeticiones;
+                    contador++;
+                }
             }
         }
 
         return info;
+    }
+
+    public ArrayList<String> ordenados(Map<String, ArrayList<String>> map)
+    {
+        ArrayList<String> categorias = new ArrayList<String>(map.keySet());
+        Collections.sort(categorias, new OrdenarCategoria());
+        return categorias;
     }
 
 
@@ -138,22 +161,40 @@ public class Controlador
 
     }
 
-    public String verArticulos(Map<String, ArrayList<String>> map)
+    public String verArticulos(Map<String, ArrayList<String>> map, boolean ordenado)
     {
         String info = "";
         int contador = 1;
         
-        for(String categoria: map.keySet())
+        if(ordenado)
         {
-            info += "\n" + categoria;
-            contador = 1;
-            ArrayList<String> productos = map.get(categoria);
-            for(String producto: productos)
+            for(String categoria: ordenados(map))
             {
-                info += "\n\t" + contador + ". " + producto;
-                contador++;
+                info += "\n" + categoria;
+                contador = 1;
+                ArrayList<String> productos = map.get(categoria);
+                for(String producto: productos)
+                {
+                    info += "\n\t" + contador + ". " + producto;
+                    contador++;
+                }
+                
             }
-            
+        }
+        else
+        {
+            for(String categoria: map.keySet())
+            {
+                info += "\n" + categoria;
+                contador = 1;
+                ArrayList<String> productos = map.get(categoria);
+                for(String producto: productos)
+                {
+                    info += "\n\t" + contador + ". " + producto;
+                    contador++;
+                }
+                
+            }
         }
         return info;
     }
