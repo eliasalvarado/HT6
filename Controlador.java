@@ -11,18 +11,60 @@ import java.util.Map;
 public class Controlador
 {
     private Archivo archivo = new Archivo();
-    private Factory<String, ArrayList<String>> mapFactory;
-    private Map<String, ArrayList<String>> inventario;
-    private Map<String, ArrayList<String>> carrito;
+    private Factory<String, ArrayList<String>> mapFactory = new Factory<>();
+    private Map<String, ArrayList<String>> inventario, carrito;
 
     public String usoMap(int tipo)
     {
-        mapFactory = new Factory<>(tipo);
-        this.inventario = this.mapFactory.getInstance();
-        this.carrito = this.mapFactory.getInstance();
+        this.inventario = this.mapFactory.crear(tipo);
+        this.carrito = this.mapFactory.crear(tipo);
         if(tipo == 1) return "\n---Utilizando HashMap---";
         else if(tipo == 2) return "\n---Utilizando TreeMap---";
         else return "\n---Utilizando LinkedHashMap---";
+    }
+
+    public String productosCategoria(String categoria)
+    {
+        String info = "";
+        int contador = 1;
+        if(this.inventario.containsKey(categoria))
+        {
+            ArrayList<String> productos = this.inventario.get(categoria);
+            for(String producto: productos)
+            {
+                info += "\n\t" + contador + ". " + producto;
+                contador++;
+            }
+        }
+        else info = "\nNo se cuenta con la categoria.";
+
+        return info;
+    }
+
+
+    public String agregarProducto(String categoria, String producto)
+    {
+        String info = "";
+        if(this.inventario.containsKey(categoria))
+        {
+            ArrayList<String> productosInventario = this.inventario.get(categoria);
+            for(String productoInventario: productosInventario)
+            {
+                if(producto.equals(productoInventario))
+                {
+                    ArrayList<String> productosCarrito = new ArrayList<>();
+                    if(this.carrito.containsKey(categoria)) productosCarrito = carrito.get(categoria);
+                    productosCarrito.add(producto);
+                    this.carrito.put(categoria, productosCarrito);
+                    info = "\nSe ha agregado el producto: " + producto + " a su coleccion.";
+                    break;
+                }
+                else info = "\nNo se cuenta con el producto indicado.";
+            }
+        }
+        else info = "\nNo se cuenta con la categoria indicada.";
+
+        return info;
     }
 
     public String leerArchivo(String ruta)
@@ -36,7 +78,7 @@ public class Controlador
         }
     }
 
-    private void convertirInventario()
+    public void convertirInventario()
     {
         ArrayList<String> lista = archivo.leerArchivo();
         String categoriaAnterior = "";
@@ -64,25 +106,33 @@ public class Controlador
 
     }
 
-    public String verArticulos()
-    {        
-        convertirInventario();
-
+    public String verArticulos(Map<String, ArrayList<String>> map)
+    {
         String info = "";
         int contador = 1;
         
-        for(String categoria: this.inventario.keySet())
+        for(String categoria: map.keySet())
         {
             info += "\n" + categoria;
             contador = 1;
-            ArrayList<String> productos = this.inventario.get(categoria);
+            ArrayList<String> productos = map.get(categoria);
             for(String producto: productos)
             {
-                info += "\n\t\t" + contador + ". " + producto;
+                info += "\n\t" + contador + ". " + producto;
                 contador++;
             }
             
         }
         return info;
+    }
+
+    public Map<String, ArrayList<String>> getInventario()
+    {
+        return this.inventario;
+    }
+
+    public Map<String, ArrayList<String>> getCarrito()
+    {
+        return this.carrito;
     }
 }

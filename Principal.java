@@ -35,10 +35,16 @@ public class Principal
 
         while(buclePrincipal)
         {
+            controlador.convertirInventario();
             respuesta = pregunta("\n¿Que desea realizar?\n1. Agregar producto.\n2. Mostrar categoria de un producto.\n3. Mostrar carrito.\n4. Mostrar inventario.\n5. Salir.\nRespuesta: ", 5);
             switch (respuesta) {
                 case 1:
-                    System.out.println("\n1.");
+                    System.out.println("\nIngrese la categoria del producto que desee agregar.\nRespuesta: ");
+                    String categoria = scanner.nextLine();
+                    //System.out.println("\nProductos disponibles:" + controlador.productosCategoria(categoria));
+                    System.out.println("\nIngrese el producto que desee agregar.\nRespuesta: ");
+                    String producto = scanner.nextLine();
+                    System.out.println(controlador.agregarProducto(categoria.trim(), producto.trim()));
                     break;
 
                 case 2:
@@ -46,26 +52,35 @@ public class Principal
                     break;
 
                 case 3:
-                    respuesta = pregunta("\n¿Como lo desea visualizar?\n1. Ordenados por tipo.\n2. Sin ordenar.\nRespueta: ", 2);
-                    if(respuesta == 1)
-                    {
-                        System.out.println("\nOrdenados");
-                    }
+                    if(controlador.getCarrito().isEmpty()) System.out.println("\nAun no ha agregado ningun producto a su coleccion.");
                     else
                     {
-                        System.out.println("\nSin ordenar");
+                        //System.out.println(controlador.getCarrito());
+                        respuesta = pregunta("\n¿Como lo desea visualizar?\n1. Ordenados por tipo.\n2. Sin ordenar.\nRespueta: ", 2);
+                        if(respuesta == 1)
+                        {
+                            System.out.println("\nOrdenados");
+                        }
+                        else
+                        {
+                            System.out.println(controlador.verArticulos(controlador.getCarrito()));
+                        }
                     }
                     break;
                 
                 case 4:
-                    respuesta = pregunta("\n¿Como lo desea visualizar?\n1. Ordenados por tipo.\n2. Sin ordenar.\nRespueta: ", 2);
-                    if(respuesta == 1)
-                    {
-                        System.out.println("\nOrdenados");
-                    }
+                    if(controlador.getInventario().isEmpty()) System.out.println("\nAun no se tiene un inventario creado.");
                     else
                     {
-                        System.out.println(controlador.verArticulos());
+                        respuesta = pregunta("\n¿Como lo desea visualizar?\n1. Ordenados por tipo.\n2. Sin ordenar.\nRespueta: ", 2);
+                        if(respuesta == 1)
+                        {
+                            System.out.println("\nOrdenados");
+                        }
+                        else
+                        {
+                            System.out.println(controlador.verArticulos(controlador.getInventario()));
+                        }
                     }
                     break;
                 

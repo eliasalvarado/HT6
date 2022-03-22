@@ -12,22 +12,18 @@ import java.util.TreeMap;
 
 public class Factory<T,V>
 {
-    private Map<T,V> map;
 
-    public Factory(int tipo) 
+    public Map<T,V> crear(int tipo) 
     {
         switch (tipo) {
             case 1:
-                this.map = new HashMap<T,V>();
+                return new HashMap<T,V>();
             case 2:
-                this.map = new TreeMap<T,V>();
+                return new TreeMap<T,V>();
             case 3:
-                this.map = new LinkedHashMap<T,V>();
+                return new LinkedHashMap<T,V>();
+            default:
+                return null;
         }
-    }
-
-    public Map<T,V> getInstance()
-    {
-        return this.map;
     }
 }
