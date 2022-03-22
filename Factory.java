@@ -11,8 +11,11 @@ import java.util.Map;
 import java.util.TreeMap;
 
 public class Factory<T,V>
-{
-
+{   
+    /** 
+     * @param tipo
+     * @return Map<T, V>
+     */
     public Map<T,V> crear(int tipo) 
     {
         switch (tipo) {

@@ -17,6 +17,10 @@ public class Controlador
     private Factory<String, ArrayList<String>> mapFactory = new Factory<>();
     private Map<String, ArrayList<String>> inventario, carrito;
 
+    /** 
+     * @param tipo
+     * @return String
+     */
     public String usoMap(int tipo)
     {
         this.inventario = this.mapFactory.crear(tipo);
@@ -25,7 +29,11 @@ public class Controlador
         else if(tipo == 2) return "\n---Utilizando TreeMap---";
         else return "\n---Utilizando LinkedHashMap---";
     }
-
+    
+    /** 
+     * @param categoria
+     * @return String
+     */
     public String productosCategoria(String categoria)
     {
         String info = "";
@@ -43,7 +51,11 @@ public class Controlador
 
         return info;
     }
-
+    
+    /** 
+     * @param producto
+     * @return String
+     */
     public String categoriaProducto(String producto)
     {
         for(String categoria: this.inventario.keySet())
@@ -51,12 +63,16 @@ public class Controlador
             ArrayList<String> productos = this.inventario.get(categoria);
             for(String productoInventario: productos)
             {
-                if(producto.equals(productoInventario)) return "\nEl producto:" + producto + " pertenece a la categoria " + categoria;
+                if(producto.equals(productoInventario)) return "\nEl producto:" + producto + " pertenece a la categoria: " + categoria;
             }
         }
         return "\nNo se encontro la categoria para el producto indicado, probablemente este mal ingresado.";
     }
-
+    
+    /** 
+     * @param ordenado
+     * @return String
+     */
     public String datosProducto(boolean ordenado)
     {
         String info = "";
@@ -96,15 +112,23 @@ public class Controlador
 
         return info;
     }
-
+    
+    /** 
+     * @param map
+     * @return ArrayList<String>
+     */
     public ArrayList<String> ordenados(Map<String, ArrayList<String>> map)
     {
         ArrayList<String> categorias = new ArrayList<String>(map.keySet());
         Collections.sort(categorias, new OrdenarCategoria());
         return categorias;
     }
-
-
+    
+    /** 
+     * @param categoria
+     * @param producto
+     * @return String
+     */
     public String agregarProducto(String categoria, String producto)
     {
         String info = "";
@@ -129,7 +153,11 @@ public class Controlador
 
         return info;
     }
-
+    
+    /** 
+     * @param ruta
+     * @return String
+     */
     public String leerArchivo(String ruta)
     {
         try {
@@ -168,7 +196,12 @@ public class Controlador
         }
 
     }
-
+    
+    /** 
+     * @param map
+     * @param ordenado
+     * @return String
+     */
     public String verArticulos(Map<String, ArrayList<String>> map, boolean ordenado)
     {
         String info = "";
@@ -206,12 +239,18 @@ public class Controlador
         }
         return info;
     }
-
+    
+    /** 
+     * @return Map<String, ArrayList<String>>
+     */
     public Map<String, ArrayList<String>> getInventario()
     {
         return this.inventario;
     }
-
+    
+    /** 
+     * @return Map<String, ArrayList<String>>
+     */
     public Map<String, ArrayList<String>> getCarrito()
     {
         return this.carrito;

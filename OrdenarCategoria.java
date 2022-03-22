@@ -8,12 +8,16 @@ import java.util.Comparator;
  */
 
 public class OrdenarCategoria implements Comparator<String>
-{
-
+{   
+    /** 
+     * @param o1
+     * @param o2
+     * @return int
+     */
     @Override
-    public int compare(String o1, String o2) {
+    public int compare(String o1, String o2)
+    {
         // TODO Auto-generated method stub
         return o1.compareTo(o2);
     }
-    
 }

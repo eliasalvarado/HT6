@@ -9,6 +9,9 @@ import java.util.Scanner;
 
 public class Principal
 {   
+    /** 
+     * @param args
+     */
     public static void main(String[] args)
     {
         Scanner scanner = new Scanner(System.in);
@@ -78,7 +81,6 @@ public class Principal
         }
 
     }  
-
     
     /** 
      * @param pregunta
